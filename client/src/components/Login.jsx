@@ -28,9 +28,23 @@ const LoginSignup = () => {
     console.log(json);
   };
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
-    console.log(credentials);
+
+    const { username, password, email } = credentials;
+
+    const response = await fetch(`${backend_host}/api/auth/users/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, email, password }),
+    });
+    const json = await response.json();
+    // console.log(json);
+    if (json.success) {
+      alert("User registration Sucessful");
+    }
   };
 
   return (

@@ -9,9 +9,7 @@ const jwt = require("jsonwebtoken");
 
 const JWT_SERECT = process.env.JWT_SERECT;
 
-
 // User Routes
-
 
 // ROUTE 1 : Create a User using: POST "/api/auth/users/register". Doesn't require Auth
 router.post(
@@ -28,15 +26,18 @@ router.post(
     }
 
     const { username, email, password } = req.body;
+    var success = false;
 
     try {
       let user = await User.findOne({ $or: [{ email }, { username }] });
 
       if (user) {
         if (user.email === email) {
-          return res.status(400).json({ message: "Email already exists" });
+          success = false;
+          return res.status(400).json({ success, message: "Email already exists" });
         } else {
-          return res.status(400).json({ message: "Username already exists" });
+          success = false;
+          return res.status(400).json({ success, message: "Username already exists" });
         }
       }
 
@@ -105,9 +106,7 @@ router.post("/users/login", [body("identifier", "Enter a valid email or password
   }
 });
 
-
 // Admin Routes
-
 
 // ROUTE 3 : Create a Admin using: POST "/api/auth/admins/register". Doesn't require Auth
 router.post(
@@ -200,7 +199,5 @@ router.post("/admins/login", [body("identifier", "Enter a valid email or passwor
     res.status(500).send("Internal Server Error.");
   }
 });
-
-
 
 module.exports = router;
