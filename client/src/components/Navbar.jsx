@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Toggle from "./Toggle";
+
 
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -28,7 +30,8 @@ const Navbar = () => {
         </li>
       </ul>
 
-      <div className="hidden text-xl md:flex justify-between font-semibold">
+      <div className="hidden text-xl md:flex justify-between items-center font-semibold">
+        <Toggle />
         <li className="hover:text-[#4285F4] inline px-6 py-3 cursor-pointer">
           <Link to="/login">Log in</Link>
         </li>

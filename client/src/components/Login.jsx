@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import ThemeContext from "../context/ThemeContext";
 
 const LoginSignup = () => {
   const [isLoginForm, setIsLoginForm] = useState(true);
   const [credentials, setCredentials] = useState([]);
   const backend_host = "http://localhost:5000";
+
+  const { theme } = useContext(ThemeContext);
 
   const toggleSignup = () => {
     setIsLoginForm(!isLoginForm);
@@ -48,8 +51,8 @@ const LoginSignup = () => {
   };
 
   return (
-    <div className="grid place-items-center h-screen bg-gradient-to-r from-blue-900 to-blue-400">
-      <div className="bg-white rounded-lg shadow-xl w-full sm:w-2/3 lg:w-1/2 xl:w-1/3 p-8">
+    <div className="grid place-items-center h-screen">
+      <div className=" bg-white text-black rounded-lg shadow-xl w-full sm:w-2/3 lg:w-1/2 xl:w-1/3 p-8">
         <div className="flex justify-center mb-8">
           <h1 className="text-3xl font-bold text-center w-full transition-colors duration-500 ease-in-out">{isLoginForm ? "Login" : "Signup"}</h1>
         </div>
