@@ -38,10 +38,12 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Navigation */}
-      <div className="md:hidden flex items-center">
+      <div className="md:hidden flex gap-2 items-center">
+        <Toggle />
+
         <div
           onClick={toggleMobileMenu}
-          className="bg-[#4285F4] rounded-lg text-white font-bold cursor-pointer inline py-2 px-3 border-2 border-[#4285F4] hover:bg-white hover:text-[#4285F4] text-xl"
+          className="bg-[#2c3e48] rounded-lg text-white font-bold cursor-pointer inline py-2 px-3 border-2 border-[#4285F4] hover:bg-white hover:text-[#2c3e48] text-xl"
         >
           {isMobileMenuOpen ? <i className="ri-close-fill"></i> : <i className="ri-menu-fill"></i>}
         </div>
@@ -50,7 +52,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <ul
-          className="fixed top-0 left-0 bottom-0 w-3/4 text-2xl py-32 md:hidden font-semibold bg-[#4285F4]/50 px-6 text-white duration-700 animate__animated animate__fadeInLeftBig"
+          className="fixed top-0 left-0 bottom-0 w-1/2 text-2xl py-32 md:hidden font-semibold bg-[#4285F4]/50 px-6 text-white duration-700 animate__animated animate__fadeInLeftBig"
           // onClick={toggleMobileMenu}
         >
           <li className="hover:text-[#4285F4] px-6 py-3 cursor-pointer">
