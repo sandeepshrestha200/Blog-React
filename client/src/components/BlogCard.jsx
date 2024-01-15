@@ -6,7 +6,7 @@ const BlogCard = () => {
   // const { theme } = useContext(ThemeContext);
 
   return (
-    <div className="w-[650px] bg-white mb-[20px] p-4 rounded-md overflow-hidden">
+    <div className="md:w-[650px] bg-white mb-[20px] p-4 rounded-md overflow-hidden">
       <h2 className="font-bold text-[#344955] text-[1.75rem] mb-2">12 title Lorem ipsum, dolor sit amet. dolor sit amet.</h2>
       <p className="text-gray-400">
         by <span className="text-[#4285F4]">Sandeep Shrestha</span> | Jan 12, 2024
