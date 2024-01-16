@@ -5,7 +5,7 @@ import "remixicon/fonts/remixicon.css";
 import Home from "./components/Home";
 import SideBar from "./components/SideBar";
 import Footer from "./components/Footer";
-import Blogs from "./components/SingleBlog";
+import SingleBlog from "./components/SingleBlog";
 
 const App = () => {
   return (
@@ -17,7 +17,7 @@ const App = () => {
             <Routes>
               <Route exact path="/" element={<Home />} />
               <Route exact path="/login" element={<Login />} />
-              <Route exact path="/blog/:id" element={<Blogs />} />
+              <Route exact path="/blog/:id" element={<SingleBlog />} />
             </Routes>
           </div>
           <div className="">

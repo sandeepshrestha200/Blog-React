@@ -2,18 +2,18 @@ import { useContext } from "react";
 import ThemeContext from "../context/ThemeContext";
 import imgi from "./assets/img/img.jpg";
 
-const Blogs = () => {
+const SingleBlog = () => {
   const { theme } = useContext(ThemeContext);
   return (
     <>
       <div className="space-y-8">
         {/* card div */}
         <div className={`py-2 px-6 w-full ${theme === "dark" ? "bg-[#344955]" : "bg-white"} rounded-md`}>
-          <h3 className={`font-bold text-3xl hover:text-blue-600 cursor-pointer my-3 ${theme === "dark" ? "text-white" : "text-[#344955]"}`}>
+          <h3 className={`font-bold text-3xl hover:text-[#366bea] cursor-pointer my-3 ${theme === "dark" ? "text-white" : "text-[#344955]"}`}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, ea.
           </h3>
           <p className="my-4 text-[#919ca2]">
-            by <span className="text-blue-600 font-bold cursor-pointer">Author</span> | Timestamp
+            by <span className="text-[#366bea] font-bold cursor-pointer">Author</span> | Timestamp
           </p>
           <hr className="my-5" />
           <img src={imgi} alt="title" className="my-5 mx-auto rounded-md w-full" />
@@ -33,4 +33,4 @@ const Blogs = () => {
   );
 };
 
-export default Blogs;
+export default SingleBlog;
