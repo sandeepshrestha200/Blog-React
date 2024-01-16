@@ -3,7 +3,7 @@ import BlogCard from "./BlogCard";
 const Home = () => {
   return (
     <>
-      <div className="">
+      <div className="mx-auto">
         <BlogCard />
       </div>
     </>

@@ -5,7 +5,7 @@ const Footer = () => {
     <>
       <div className="w-full">
         <div className="w-full bg-[#344955] text-white py-5">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-5 mx-auto md:w-[970px]">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-5 mx-auto md:w-2/3">
             <div className="col-span-1 flex items-center mx-auto">
               <h2 className="text-2xl font-bold">Blogger</h2>
             </div>

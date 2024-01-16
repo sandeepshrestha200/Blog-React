@@ -5,24 +5,26 @@ import "remixicon/fonts/remixicon.css";
 import Home from "./components/Home";
 import SideBar from "./components/SideBar";
 import Footer from "./components/Footer";
+import Blogs from "./components/SingleBlog";
 
 const App = () => {
   return (
     <>
       <BrowserRouter>
         <Navbar />
-        <div className="grid grid-cols-1 py-10 lg:grid-cols-2 w-5/6 gap-[10px] mx-auto">
-          <div className="">
+        <div className="grid grid-cols-1 py-10 lg:grid-cols-3 w-2/3 gap-6 mx-auto">
+          <div className="mx-auto lg:col-span-2">
             <Routes>
               <Route exact path="/" element={<Home />} />
               <Route exact path="/login" element={<Login />} />
+              <Route exact path="/blog/:id" element={<Blogs />} />
             </Routes>
           </div>
           <div className="">
             <SideBar />
           </div>
         </div>
-        <Footer/>
+        <Footer />
       </BrowserRouter>
     </>
   );
