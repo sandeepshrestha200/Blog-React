@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import SideBar from "./components/SideBar";
 import Footer from "./components/Footer";
 import SingleBlog from "./components/SingleBlog";
+import CreateBlog from "./components/CreateBlog";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
               <Route exact path="/" element={<Home />} />
               <Route exact path="/login" element={<Login />} />
               <Route exact path="/blog/:id" element={<SingleBlog />} />
+              <Route exact path="/blog/create" element={<CreateBlog />} />
             </Routes>
           </div>
           <div className="">

@@ -36,7 +36,7 @@ const Footer = () => {
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 mx-auto md:w-[970px]">
             <div className="col-span-1 flex items-center mx-auto">
               <p className="text-base">
-                Design by -{" "}
+                Design by -
                 <a href="https://www.sandeepshrestha200.com.np" className="hover:text-[#4298f8]">
                   Sandeep Shrestha
                 </a>
@@ -46,16 +46,16 @@ const Footer = () => {
             <div className="col-span-1 flex gap-2 items-center mx-auto">
               <ul className="space-x-8">
                 <li className="inline-block hover:text-[#4298f8]">
-                  {" "}
-                  <Link to="/">Home</Link>{" "}
+                  <Link to="/">Home</Link>
                 </li>
                 <li className="inline-block hover:text-[#4298f8]">
-                  {" "}
-                  <Link to="/about">About</Link>{" "}
+                  <Link to="/about">About</Link>
                 </li>
                 <li className="inline-block hover:text-[#4298f8]">
-                  {" "}
-                  <Link to="/contact">Contact</Link>{" "}
+                  <Link to="/contact">Contact</Link>
+                </li>
+                <li className="inline-block hover:text-[#4298f8]">
+                  <Link to="/login">Login</Link>
                 </li>
               </ul>
             </div>
