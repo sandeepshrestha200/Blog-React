@@ -42,7 +42,7 @@ const SideBar = () => {
           </div>
         </div>
 
-        <div className={`w-full mx-auto lg:mx-2 md:w-[300px] ${theme === "dark" ? "bg-[#344955] text-white" : "bg-white text-[#344955]"} rounded-md p-4`}>
+        {/* <div className={`w-full mx-auto lg:mx-2 md:w-[300px] ${theme === "dark" ? "bg-[#344955] text-white" : "bg-white text-[#344955]"} rounded-md p-4`}>
           <h3 className="font-extrabold text-xl md:text-lg">Popular Posts</h3>
 
           <div className="flex flex-col gap-4 m-2">
@@ -61,7 +61,7 @@ const SideBar = () => {
               <p className="text-base md:text-sm font-semibold hover:text-[#4298f8] cursor-pointer">12 Best CRM Software for Business in 2021</p>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className={`w-full mx-auto lg:mx-2 md:w-[300px] ${theme === "dark" ? "bg-[#344955]" : "bg-white"} rounded-md p-4`}>
           <h3 className=" font-extrabold text-xl md:text-lg">Recent Posts</h3>
@@ -84,7 +84,7 @@ const SideBar = () => {
           </div>
         </div>
 
-        <div className={`w-full mx-auto lg:mx-2 md:w-[300px] ${theme === "dark" ? "bg-[#344955]" : "bg-white"} rounded-md p-4`}>
+        {/* <div className={`w-full mx-auto lg:mx-2 md:w-[300px] ${theme === "dark" ? "bg-[#344955]" : "bg-white"} rounded-md p-4`}>
           <h3 className=" font-extrabold text-xl md:text-lg">Main Tags</h3>
 
           <div className="flex flex-wrap gap-3 my-2 text-base md:text-sm">
@@ -104,7 +104,7 @@ const SideBar = () => {
 
             <p className="text-[#4285f4] hover:text-white hover:bg-[#4285f4] border-2 border-[#4285f4] px-2 py-1 rounded cursor-pointer">Tips</p>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );
