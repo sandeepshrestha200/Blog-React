@@ -1,16 +1,14 @@
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ThemeContext from "../context/ThemeContext";
-import PropTypes from "prop-types";
 
-const LoginSignup = (props) => {
+const LoginSignup = () => {
   const [isLoginForm, setIsLoginForm] = useState(true);
   const [credentials, setCredentials] = useState([]);
   const backend_host = "http://localhost:5000";
   const { theme } = useContext(ThemeContext);
 
-  const { sidebar } = props;
-
-  sidebar("hidden");
+  let history = useNavigate();
 
   const toggleSignup = () => {
     setIsLoginForm(!isLoginForm);
@@ -32,7 +30,19 @@ const LoginSignup = (props) => {
       body: JSON.stringify({ identifier: credentials.identifier, password: credentials.password }),
     });
     const json = await response.json();
-    console.log(json);
+
+    if (json.success) {
+      //save the accessToken and redirect
+      localStorage.setItem("accessToken", json.accessToken);
+      history("/");
+
+      // alert("message: " + json.message);
+      alert("Success : " + json.message);
+    } else {
+      alert("Error : Invalid Crediantials");
+    }
+
+    // console.log(json);
   };
 
   const handleSignup = async (e) => {
@@ -55,7 +65,7 @@ const LoginSignup = (props) => {
   };
 
   return (
-    <div className="grid place-items-center h-full lg:w-2/3 mx-auto lg:mb-28">
+    <div className="grid place-items-center h-full lg:w-2/3 mx-auto lg:my-28">
       <div className={`${theme === "dark" ? "bg-[#344955] text-white" : "bg-white"}  rounded-lg shadow-xl w-full sm:w-2/3 p-8`}>
         <div className="flex justify-center mb-8">
           <h1 className="text-3xl font-bold text-center w-full transition-colors duration-500 ease-in-out">{isLoginForm ? "Login" : "Signup"}</h1>
@@ -182,7 +192,3 @@ const LoginSignup = (props) => {
 };
 
 export default LoginSignup;
-
-LoginSignup.propTypes = {
-  sidebar: PropTypes.string,
-};

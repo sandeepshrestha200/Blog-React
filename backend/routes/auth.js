@@ -3,6 +3,7 @@ const express = require("express");
 const { body, validationResult } = require("express-validator");
 const User = require("../models/User");
 const Admin = require("../models/Admin");
+const fetchuser = require("../middleware/fetchuser");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -194,6 +195,18 @@ router.post("/admins/login", [body("identifier", "Enter a valid email or passwor
     const accessToken = jwt.sign(data, JWT_SERECT);
     success = true;
     res.json({ success, message: "Admin Logged in successfully.", accessToken });
+  } catch (error) {
+    // console.error(error.message);
+    res.status(500).send("Internal Server Error.");
+  }
+});
+
+// ROUTE 5 :  Get Logged in Userdetails using: POST "/api/auth/getuser". Required Auth
+router.post("/getuser", fetchuser, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const user = await User.findById(userId).select("-password");
+    res.json({ user });
   } catch (error) {
     // console.error(error.message);
     res.status(500).send("Internal Server Error.");

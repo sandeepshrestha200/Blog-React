@@ -8,7 +8,7 @@ const SideBar = () => {
   return (
     <>
       <div className="flex flex-col gap-8">
-        <div className={`w-full mx-auto lg:mx-2 md:w-[300px] h-[150px] ${theme === "dark" ? "bg-[#344955]" : "bg-white"} rounded-md px-4 py-8 grid grid-cols-4 gap-3 text-white`}>
+        <div className={`w-full mx-auto lg:mx-2 lg:w-[300px] h-[150px] ${theme === "dark" ? "bg-[#344955]" : "bg-white"} rounded-md px-4 py-8 grid grid-cols-4 gap-3 text-white`}>
           <div className="w-full h-[35px] bg-[#3b5999] hover:bg-[#4f6aa3] rounded flex items-center justify-center text-xl cursor-pointer">
             <i className="ri-facebook-fill"></i>
           </div>
@@ -63,7 +63,7 @@ const SideBar = () => {
           </div>
         </div> */}
 
-        <div className={`w-full mx-auto lg:mx-2 md:w-[300px] ${theme === "dark" ? "bg-[#344955]" : "bg-white"} rounded-md p-4`}>
+        <div className={`w-full mx-auto lg:mx-2 lg:w-[300px] ${theme === "dark" ? "bg-[#344955]" : "bg-white"} rounded-md p-4`}>
           <h3 className=" font-extrabold text-xl md:text-lg">Recent Posts</h3>
 
           <div className="flex flex-col gap-4 m-2">

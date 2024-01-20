@@ -18,7 +18,7 @@ const Toggle = () => {
   return (
     <div>
       <div className="flex items-center">
-        <input type="checkbox" className="checkbox" id="checkbox" onClick={handleToggle} checked={checked} />
+        <input type="checkbox" className="checkbox" id="checkbox" onChange={handleToggle} checked={checked} />
         <label htmlFor="checkbox" className="checkbox-label">
           <i className="ri-sun-fill "></i>
           <i className="ri-moon-fill"></i>
