@@ -1,12 +1,15 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ThemeContext from "../context/ThemeContext";
+import { useLogin } from "../context/LoginContext";
+import PropTypes from "prop-types";
 
-const LoginSignup = () => {
+const LoginSignup = ({ showAlert }) => {
   const [isLoginForm, setIsLoginForm] = useState(true);
   const [credentials, setCredentials] = useState([]);
   const backend_host = "http://localhost:5000";
   const { theme } = useContext(ThemeContext);
+  const { loggedin } = useLogin();
 
   let history = useNavigate();
 
@@ -34,12 +37,14 @@ const LoginSignup = () => {
     if (json.success) {
       //save the accessToken and redirect
       localStorage.setItem("accessToken", json.accessToken);
+
+      loggedin();
       history("/");
 
       // alert("message: " + json.message);
-      alert("Success : " + json.message);
+      showAlert(json.message, "success");
     } else {
-      alert("Error : Invalid Crediantials");
+      showAlert(json.message, "error");
     }
 
     // console.log(json);
@@ -65,7 +70,7 @@ const LoginSignup = () => {
   };
 
   return (
-    <div className="grid place-items-center h-full lg:w-2/3 mx-auto lg:my-28">
+    <div className="grid place-items-center h-full lg:w-2/5 mx-auto lg:my-28">
       <div className={`${theme === "dark" ? "bg-[#344955] text-white" : "bg-white"}  rounded-lg shadow-xl w-full sm:w-2/3 p-8`}>
         <div className="flex justify-center mb-8">
           <h1 className="text-3xl font-bold text-center w-full transition-colors duration-500 ease-in-out">{isLoginForm ? "Login" : "Signup"}</h1>
@@ -82,7 +87,8 @@ const LoginSignup = () => {
                       placeholder="Username or Email Address"
                       onChange={onChange}
                       name="identifier"
-                      className="w-full px-4 py-2 border-b border-gray-400 focus:outline-none focus:border-blue-500"
+                      className="w-full px-4 py-2 border-b border-gray-400 focus:outline-none focus:border-blue-500 text-[#344955] rounded"
+                      value={credentials.identifier}
                       required
                     />
                   </div>
@@ -92,7 +98,8 @@ const LoginSignup = () => {
                       name="password"
                       placeholder="Password"
                       onChange={onChange}
-                      className="w-full px-4 py-2 border-b border-gray-400 focus:outline-none focus:border-blue-500"
+                      className="w-full px-4 py-2 border-b border-gray-400 focus:outline-none focus:border-blue-500 text-[#344955] rounded"
+                      value={credentials.password}
                       required
                     />
                   </div>
@@ -111,6 +118,17 @@ const LoginSignup = () => {
                     <button className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" type="submit">
                       Login
                     </button>
+                  </div>
+
+                  <div className="mb-2">
+                    <p
+                      className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-center"
+                      onClick={() => {
+                        setCredentials({ identifier: "naruto@gmail.com", password: "Naruto@1234" });
+                      }}
+                    >
+                      Insert Credentials
+                    </p>
                   </div>
                   <div className="text-center">
                     <p>
@@ -192,3 +210,7 @@ const LoginSignup = () => {
 };
 
 export default LoginSignup;
+
+LoginSignup.propTypes = {
+  showAlert: PropTypes.func,
+};

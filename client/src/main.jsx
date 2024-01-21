@@ -3,11 +3,14 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import ThemeProvider from "./context/ThemeProvider";
+import { LoginProvider } from "./context/LoginContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ThemeProvider>
-      <App className="font-['Poppins', sans-serif]" />
-    </ThemeProvider>
+    <LoginProvider>
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+    </LoginProvider>
   </React.StrictMode>
 );

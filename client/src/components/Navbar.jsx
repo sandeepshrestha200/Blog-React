@@ -1,9 +1,22 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Toggle from "./Toggle";
+import { useLogin } from "../context/LoginContext.jsx";
+import PropTypes from "prop-types";
 
-const Navbar = () => {
+const Navbar = ({ showAlert }) => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { isLoggedIn } = useLogin();
+  const { loggedout } = useLogin();
+  const history = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    history("/");
+    showAlert("User has logged out successfully.", "success");
+
+    loggedout();
+  };
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -31,9 +44,15 @@ const Navbar = () => {
 
       <div className="hidden text-xl md:flex justify-between items-center font-semibold">
         <Toggle />
-        <li className="hover:text-[#4285F4] inline px-6 py-3 cursor-pointer">
-          <Link to="/login">Log in</Link>
-        </li>
+        {!isLoggedIn ? (
+          <li className="hover:text-[#4285F4] inline px-6 py-3 cursor-pointer">
+            <Link to="/login">Log in</Link>
+          </li>
+        ) : (
+          <li className="hover:text-[#4285F4] inline px-6 py-3 cursor-pointer" onClick={handleLogout}>
+            <p>Logout</p>
+          </li>
+        )}
       </div>
 
       {/* Mobile Navigation */}
@@ -73,3 +92,7 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+Navbar.propTypes = {
+  showAlert: PropTypes.func,
+};
