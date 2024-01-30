@@ -38,5 +38,5 @@ const BlogCard = (props) => {
 export default BlogCard;
 
 BlogCard.propTypes = {
-  id: PropTypes.object,
+  id: PropTypes.number,
 };

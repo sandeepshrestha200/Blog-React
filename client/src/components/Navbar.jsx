@@ -40,6 +40,10 @@ const Navbar = ({ showAlert }) => {
         <li className="hover:text-[#4285F4] inline px-6 py-3 cursor-pointer">
           <Link to="/contact">Contact</Link>
         </li>
+
+        <li className="hover:text-[#4285F4] inline px-6 py-3 cursor-pointer">
+          <Link to="/blog/create">Create</Link>
+        </li>
       </ul>
 
       <div className="hidden text-xl md:flex justify-between items-center font-semibold">

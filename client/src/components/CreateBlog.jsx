@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import ThemeContext from "../context/ThemeContext";
-// import { useLogin } from "../context/LoginContext";
+import { useLogin } from "../context/LoginContext";
 import { useContext } from "react";
 import PropTypes from "prop-types";
 
 const CreateBlog = () => {
   const [content, setContent] = useState({ title: "", body: "", tag: "", category: "" });
   const [image, setImage] = useState(null);
-  // const { isLoggedIn } = useLogin();
+  const { isLoggedIn } = useLogin();
   const { theme } = useContext(ThemeContext);
   // const { userId, author_name } = props;
 
@@ -40,6 +40,8 @@ const CreateBlog = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    console.log(content);
+
     try {
       const formData = new FormData();
       formData.append("title", content.title);
@@ -70,8 +72,8 @@ const CreateBlog = () => {
     }
   };
 
-  // if (isLoggedIn) {
-  if (true) {
+  if (isLoggedIn) {
+    // if (true) {
     return (
       <>
         <div className="m-6  mt-12 flex item-center justify-center">
