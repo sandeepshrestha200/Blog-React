@@ -14,11 +14,8 @@ import Alert from "./components/Alert.jsx";
 
 const App = () => {
   const [alert, setAlert] = useState(null);
-  const { loggedin, isLoggedIn } = useLogin();
-
-  if (localStorage.getItem("accessToken")) {
-    loggedin();
-  }
+  const [User, setUser] = useState([]);
+  const { loggedin } = useLogin();
 
   const showAlert = (message, type) => {
     setAlert({
@@ -32,15 +29,27 @@ const App = () => {
 
   const accessToken = localStorage.getItem("accessToken");
 
+  const fetchUser = async () => {
+    const response = await fetch("http://localhost:5000/api/auth/getuser", {
+      method: "POST",
+      headers: {
+        "access-token": accessToken,
+      },
+    });
+    const userData = await response.json();
+    setUser(userData);
+  };
+
   useEffect(() => {
+    if (localStorage.getItem("accessToken")) {
+      loggedin();
+    }
     if (accessToken) {
-      // fetchinfo();
+      fetchUser();
       // Call the login function from the context to set the user as logged in
       loggedin();
     }
   }, [loggedin, accessToken]);
-
-  console.log(isLoggedIn);
 
   return (
     <>
@@ -51,7 +60,7 @@ const App = () => {
           <Route exact path="/" element={<Home />} />
           <Route exact path="/login" element={<Login showAlert={showAlert} />} />
           <Route exact path="/blog/:id" element={<SingleBlog />} />
-          <Route exact path="/blog/create" element={<CreateBlog />} />
+          <Route exact path="/blog/create" element={<CreateBlog username={User.username} userId={User._id} showAlert={showAlert} />} />
         </Routes>
 
         <GoToTop />

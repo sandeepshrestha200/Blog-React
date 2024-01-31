@@ -5,15 +5,12 @@ import { useLogin } from "../context/LoginContext";
 import { useContext } from "react";
 import PropTypes from "prop-types";
 
-const CreateBlog = () => {
+const CreateBlog = (props) => {
   const [content, setContent] = useState({ title: "", body: "", tag: "", category: "" });
   const [image, setImage] = useState(null);
   const { isLoggedIn } = useLogin();
   const { theme } = useContext(ThemeContext);
-  // const { userId, author_name } = props;
-
-  const userId = "DRGHT";
-  const author_name = "DRGHT";
+  const { userId, username, showAlert } = props;
 
   const handleEditorChange = (content, editor) => {
     setContent((prevContent) => ({ ...prevContent, body: editor.getContent() }));
@@ -48,7 +45,7 @@ const CreateBlog = () => {
       formData.append("content", content.body);
       formData.append("image", image);
       formData.append("author", userId);
-      formData.append("author_name", author_name);
+      formData.append("author_name", username);
       formData.append("tag", content.tag);
       formData.append("category", content.category);
 
@@ -59,15 +56,20 @@ const CreateBlog = () => {
 
       if (response.ok) {
         // const data = await response.json();
-        console.log("data saved"); // Log the response from the server
+        // console.log("data saved"); // Log the response from the server
 
         // Reset the content and image state after submission if needed
         setContent({ title: "", body: "", tag: "", category: "" });
+        showAlert("Blog Created Sucessfully", "success");
+
         setImage(null);
       } else {
+        showAlert("Something Went wrong", "error");
+
         console.error("Error submitting form:", response.statusText);
       }
     } catch (error) {
+      showAlert("Something Went wrong", "error");
       console.error("Error submitting form:", error);
     }
   };
@@ -170,5 +172,6 @@ export default CreateBlog;
 
 CreateBlog.propTypes = {
   userId: PropTypes.string,
-  author_name: PropTypes.string,
+  username: PropTypes.string,
+  showAlert: PropTypes.func,
 };

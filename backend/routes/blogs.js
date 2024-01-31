@@ -54,6 +54,7 @@ router.post("/create", upload.single("image"), articleValidation, async (req, re
 
     res.status(201).json({ article: newArticle });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: error.message });
   }
 });
