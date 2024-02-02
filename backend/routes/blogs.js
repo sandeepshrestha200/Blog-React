@@ -25,7 +25,7 @@ const articleValidation = [
   body("tag", "Enter a proper tag with at least 3 characters.").isLength({ min: 3 }),
 ];
 
-// POST endpoint to create a new article with validations
+// ROUTE 1 : Create a Blog using: POST "/api/blogs/create". Require Auth
 router.post("/create", upload.single("image"), articleValidation, async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -59,6 +59,7 @@ router.post("/create", upload.single("image"), articleValidation, async (req, re
   }
 });
 
+// ROUTE 2 : Fetch all Blogs using: GET "/api/blogs/fetcharticles". Doesn't require Auth
 router.get("/fetcharticles", async (req, res) => {
   try {
     const blogs = await Article.find();
@@ -69,6 +70,7 @@ router.get("/fetcharticles", async (req, res) => {
   }
 });
 
+// ROUTE 3 : Fetch all own Blogs using: POST "/api/blogs/fetchuserblogs". Require Auth
 router.post("/fetchuserblogs", fetchuser, async (req, res) => {
   try {
     const notes = await Article.find({ user: req.user._id });
@@ -78,4 +80,17 @@ router.post("/fetchuserblogs", fetchuser, async (req, res) => {
     res.status(500).json({ error: "Failed to fetch blogs" });
   }
 });
+
+// ROUTE 4 : Fetch a Specific Blog using: GET "/api/blogs/:id". Doesn't require Auth
+router.get("/:id", async (req, res) => {
+  try {
+    const blogId = req.params.id;
+    const blog = await Article.findById(blogId);
+    res.json(blog);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 module.exports = router;
