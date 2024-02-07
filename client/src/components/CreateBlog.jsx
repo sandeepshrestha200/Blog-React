@@ -78,7 +78,7 @@ const CreateBlog = (props) => {
     // if (true) {
     return (
       <>
-        <div className="m-6  mt-12 flex item-center justify-center">
+        <div className="m-6 mt-12 flex item-center justify-center">
           <div className={`p-6 rounded-lg   ${theme === "dark" ? "bg-[#344955]" : "bg-white"}`}>
             <h1 className="text-3xl">New Blog Post</h1>
 

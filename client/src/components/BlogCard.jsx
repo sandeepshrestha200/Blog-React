@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import DOMPurify from "dompurify";
 import ThemeContext from "../context/ThemeContext";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +10,10 @@ const BlogCard = (props) => {
   const history = useNavigate();
 
   const imgUrl = import.meta.env.VITE_BACKEND_IMG;
+
+  const purify = (content) => {
+    return DOMPurify.sanitize(content);
+  };
 
   const viewBlog = (id) => {
     history(`/blog/${id}`);
@@ -29,7 +34,7 @@ const BlogCard = (props) => {
         </p>
         <div className="sm:flex ">
           <img src={`${imgUrl}${image}`} alt={title} className="w-[344px] h-[200px] sm:w-[145px] sm:h-[100px] rounded-md" />
-          <div className="px-2">{content}</div>
+          <div className="px-2" dangerouslySetInnerHTML={{ __html: purify(content) }}></div>
         </div>
       </div>
     </div>

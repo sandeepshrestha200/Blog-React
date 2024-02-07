@@ -9,8 +9,8 @@ import SingleBlog from "./components/SingleBlog";
 import CreateBlog from "./components/CreateBlog";
 import GoToTop from "./components/GoToTop";
 import { useLogin } from "./context/LoginContext.jsx";
-
 import Alert from "./components/Alert.jsx";
+import MyProfile from "./components/MyProfile.jsx";
 
 const App = () => {
   const [alert, setAlert] = useState(null);
@@ -61,6 +61,7 @@ const App = () => {
           <Route exact path="/login" element={<Login showAlert={showAlert} />} />
           <Route exact path="/blog/:id" element={<SingleBlog />} />
           <Route exact path="/blog/create" element={<CreateBlog username={User.username} userId={User._id} showAlert={showAlert} />} />
+          <Route exact path="/me" element={<MyProfile />} />
         </Routes>
 
         <GoToTop />
