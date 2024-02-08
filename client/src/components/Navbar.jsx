@@ -4,7 +4,7 @@ import Toggle from "./Toggle";
 import { useLogin } from "../context/LoginContext.jsx";
 import PropTypes from "prop-types";
 
-const Navbar = ({ showAlert }) => {
+const Navbar = ({ showAlert, username }) => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { isLoggedIn } = useLogin();
   const { loggedout } = useLogin();
@@ -41,9 +41,11 @@ const Navbar = ({ showAlert }) => {
           <Link to="/contact">Contact</Link>
         </li>
 
-        <li className="hover:text-[#4285F4] inline px-6 py-3 cursor-pointer">
-          <Link to="/blog/create">Create</Link>
-        </li>
+        {isLoggedIn && (
+          <li className="hover:text-[#4285F4] inline px-6 py-3 cursor-pointer">
+            <Link to="/me">{username}</Link>
+          </li>
+        )}
       </ul>
 
       <div className="hidden text-xl md:flex justify-between items-center font-semibold">
@@ -99,4 +101,5 @@ export default Navbar;
 
 Navbar.propTypes = {
   showAlert: PropTypes.func,
+  username: PropTypes.string,
 };

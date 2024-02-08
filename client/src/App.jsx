@@ -14,7 +14,7 @@ import MyProfile from "./components/MyProfile.jsx";
 
 const App = () => {
   const [alert, setAlert] = useState(null);
-  const [User, setUser] = useState([]);
+  const [user, setUser] = useState([]);
   const { loggedin } = useLogin();
 
   const showAlert = (message, type) => {
@@ -49,18 +49,19 @@ const App = () => {
       // Call the login function from the context to set the user as logged in
       loggedin();
     }
+    //eslint-disable-next-line
   }, [loggedin, accessToken]);
 
   return (
     <>
       <BrowserRouter>
-        <Navbar showAlert={showAlert} />
+        <Navbar showAlert={showAlert} username={user.username} />
         <Alert alert={alert} />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/login" element={<Login showAlert={showAlert} />} />
           <Route exact path="/blog/:id" element={<SingleBlog />} />
-          <Route exact path="/blog/create" element={<CreateBlog username={User.username} userId={User._id} showAlert={showAlert} />} />
+          <Route exact path="/blog/create" element={<CreateBlog username={user.username} userId={user._id} showAlert={showAlert} />} />
           <Route exact path="/me" element={<MyProfile />} />
         </Routes>
 

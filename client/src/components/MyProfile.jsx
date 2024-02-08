@@ -10,11 +10,12 @@ const MyProfile = () => {
   const accessToken = localStorage.getItem("accessToken");
 
   // const history = useNavigate();
-  // const { isLoggedIn } = useLogin();
+  const { isLoggedIn } = useLogin();
   const { theme } = useContext(ThemeContext);
   const [userData, setUserData] = useState([]);
   const [userBlogs, setUserBlogs] = useState([]);
-  const maxWords = 50; //maximum number of words to display in the cards
+  const maxWords = 30; //maximum number of words to display in the cards
+  const history = useNavigate();
 
   // Function to limit the number of words in the content
   const limitWords = (text, maxWords) => {
@@ -47,19 +48,12 @@ const MyProfile = () => {
     setUserBlogs(updatedBlogs);
   };
 
-  // useEffect(() => {
-  //   if (!isLoggedIn) {
-  //     history("/login");
-  //   }
-  //   getUserData();
-  //   getUserBlogs();
-  //   //eslint-disable-next-line
-  // }, [token, maxWords]);
-
   useEffect(() => {
-    
     getUserData();
     getUserBlogs();
+    if (!isLoggedIn) {
+      history("/login");
+    }
     //eslint-disable-next-line
   }, []);
 
@@ -74,26 +68,18 @@ const MyProfile = () => {
                 <div>
                   <h1 className="text-2xl capitalize font-bold">{userData.username}</h1>
                   <h1 className="text-xl lowercase">{userData.email}</h1>
+                  <h1 className="text-xl">No. of Blogs : {userBlogs.length}</h1>
                 </div>
-                <div>
+                <div className="text-center bg-green-600">
                   <Link to="/blog/create">
-                    <RiAddCircleFill
-                      size="46"
-                      className="hover:text-[#4285F4] cursor-pointer flex items-center h-full text-center" // add custom class name
-                    />
+                    <RiAddCircleFill size="46" className="hover:text-[#4285F4] cursor-pointer flex items-center h-full" />
                   </Link>
                 </div>
               </div>
             </div>
-            {/* <div className={`py-2 px-6 w-full ${theme === "dark" ? "bg-[#344955]" : "bg-white"} rounded-md`}>
-              <h1 className="text-lg">Hello</h1>
-            </div> */}
+
             {userBlogs.map((blog) => {
-              return (
-                <>
-                  <BlogCard key={blog._id} id={blog._id} title={blog.title} image={blog.imageUrl} content={blog.content} author={blog.author_name} date={blog.dateTime} />
-                </>
-              );
+              return <BlogCard key={blog._id} id={blog._id} title={blog.title} image={blog.imageUrl} content={blog.content} author={blog.author_name} date={blog.dateTime} />;
             })}
           </div>
         </div>
