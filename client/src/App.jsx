@@ -62,7 +62,7 @@ const App = () => {
           <Route exact path="/login" element={<Login showAlert={showAlert} />} />
           <Route exact path="/blog/:id" element={<SingleBlog />} />
           <Route exact path="/blog/create" element={<CreateBlog username={user.username} userId={user._id} showAlert={showAlert} />} />
-          <Route exact path="/me" element={<MyProfile />} />
+          <Route exact path="/me" element={<MyProfile showAlert={showAlert} />} />
         </Routes>
 
         <GoToTop />

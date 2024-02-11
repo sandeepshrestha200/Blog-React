@@ -4,11 +4,13 @@ import { useLogin } from "../context/LoginContext";
 import { RiAddCircleFill } from "@remixicon/react";
 import { useNavigate, Link } from "react-router-dom";
 import BlogCard from "./BlogCard";
+import PropTypes from "prop-types";
 
-const MyProfile = () => {
+const MyProfile = (props) => {
   const backend_base = import.meta.env.VITE_BACKEND_BASE;
   const accessToken = localStorage.getItem("accessToken");
 
+  const { showAlert } = props;
   // const history = useNavigate();
   const { isLoggedIn } = useLogin();
   const { theme } = useContext(ThemeContext);
@@ -48,6 +50,11 @@ const MyProfile = () => {
     setUserBlogs(updatedBlogs);
   };
 
+  // const updateAfterDelete=() => {
+  
+  // }
+
+
   useEffect(() => {
     getUserData();
     getUserBlogs();
@@ -57,6 +64,7 @@ const MyProfile = () => {
     //eslint-disable-next-line
   }, []);
 
+  
   return (
     <>
       <div className="grid grid-cols-1 py-6 px-2 lg:grid-cols-3 lg:w-2/3 gap-6 mx-auto">
@@ -70,7 +78,7 @@ const MyProfile = () => {
                   <h1 className="text-xl lowercase">{userData.email}</h1>
                   <h1 className="text-xl">No. of Blogs : {userBlogs.length}</h1>
                 </div>
-                <div className="text-center bg-green-600">
+                <div className="text-center ">
                   <Link to="/blog/create">
                     <RiAddCircleFill size="46" className="hover:text-[#4285F4] cursor-pointer flex items-center h-full" />
                   </Link>
@@ -79,7 +87,19 @@ const MyProfile = () => {
             </div>
 
             {userBlogs.map((blog) => {
-              return <BlogCard key={blog._id} id={blog._id} title={blog.title} image={blog.imageUrl} content={blog.content} author={blog.author_name} date={blog.dateTime} />;
+              return (
+                <BlogCard
+                  key={blog._id}
+                  id={blog._id}
+                  title={blog.title}
+                  image={blog.imageUrl}
+                  content={blog.content}
+                  author={blog.author_name}
+                  date={blog.dateTime}
+                  showAlert={showAlert}
+                  getUserBlogs={getUserBlogs}
+                />
+              );
             })}
           </div>
         </div>
@@ -92,3 +112,7 @@ const MyProfile = () => {
 };
 
 export default MyProfile;
+
+MyProfile.propTypes = {
+  showAlert: PropTypes.func,
+};

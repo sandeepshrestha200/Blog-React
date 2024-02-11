@@ -4,6 +4,8 @@ const router = express.Router();
 const { Article } = require("../models/Blogs");
 const multer = require("multer");
 const fetchuser = require("../middleware/fetchuser");
+const fs = require("fs");
+const path = require("path"); // Import the path module
 
 // Multer storage configuration
 const storage = multer.diskStorage({
@@ -90,6 +92,38 @@ router.get("/:id", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// ROUTE 5 : Delete a Specific Blog using: DELETE "/api/blogs/deleteblog/:id". Require Auth
+router.delete("/deleteblog/:id", fetchuser, async (req, res) => {
+  try {
+    let blog = await Article.findById(req.params.id);
+    if (!blog) {
+      return res.status(404).json({ error: "Blog not found" });
+    }
+    if (blog.author.toString() !== req.user.id) {
+      return res.status(401).json({ error: "Not authorized to delete this blog" });
+    }
+
+    // Retrieve the path of the image
+    const imageUrl = blog.imageUrl; // Replace with the actual field name storing the image path
+
+    // Construct the absolute path to the image file
+    const imagePath = path.join(__dirname, "../images/", imageUrl);
+
+    // Check if the image file exists
+    if (fs.existsSync(imagePath)) {
+      // Delete the image file from the device
+      fs.unlinkSync(imagePath);
+    }
+
+    // Delete the blog from the database
+    await Article.findByIdAndDelete(req.params.id);
+    res.json({ success: "The blog has been deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting blog:", error);
+    res.status(500).json({ error: "Failed to delete blog" });
   }
 });
 
